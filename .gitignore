@@ -1,0 +1,109 @@
+# .NET Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Ll]og/
+[Ll]ogs/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.swp
+*.tmp
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+TestResults/
+
+# Coverage reports
+coverage/
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# User secrets and configuration
+**/appsettings.Development.json
+**/appsettings.*.json
+!**/appsettings.json
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# VS Code workspace settings
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# VS Code local history
+.history/
+
+# Ionide (F# VS Code extension)
+.ionide/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+*.log
+logs/
+
+# Publish profiles
+*.pubxml
+*.pubxml.user
+PublishProfiles/
+
+
+*.png
+*.jpg
+img/
+image/
+images/
+*.mp4
+.fake
