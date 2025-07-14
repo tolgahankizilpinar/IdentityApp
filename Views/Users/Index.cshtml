@@ -9,7 +9,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
-            <th></th>
+            <th style="width: 130px;"></th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +21,10 @@
                 <td>@item.Email</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
-                    <a href="" class="btn btn-sm btn-danger">Delete</a>
+                    <form asp-action="Delete" method="post" onsubmit="return confirm('Silmek istediğinizden emim misiniz?')" style="display: inline-block;">
+                        <input type="hidden" value="@item.Id" name="id">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
         }
