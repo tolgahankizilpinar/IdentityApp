@@ -5,7 +5,7 @@ namespace IdentityApp.Models
 {
     public static class IdentitySeedData
     {
-        private const string adminUser = "Admin";
+        private const string adminUser = "admin";
         private const string adminPassword = "Admin_123";
 
 
@@ -18,14 +18,15 @@ namespace IdentityApp.Models
                 context.Database.Migrate();
             }
 
-            var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
             var user = await userManager.FindByNameAsync(adminUser);
 
             if (user == null)
             {
-                user = new IdentityUser
+                user = new AppUser
                 {
+                    FullName = "tolgahan kizilpinar",
                     UserName = adminUser,
                     Email = "admin@admin.com",
                     PhoneNumber = "123456"
