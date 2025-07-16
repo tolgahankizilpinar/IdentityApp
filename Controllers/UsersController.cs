@@ -2,16 +2,19 @@ using IdentityApp.Models;
 using IdentityApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IdentityApp.Controllers
 {
     public class UsersController : Controller
     {
-        private UserManager<AppUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-        public UsersController(UserManager<AppUser> userManager)
+        public UsersController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -30,7 +33,7 @@ namespace IdentityApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+                var user = new AppUser { UserName = model.UserName, Email = model.Email, FullName = model.FullName };
 
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
@@ -60,11 +63,14 @@ namespace IdentityApp.Controllers
 
             if (user != null)
             {
+                ViewBag.Roles = await _roleManager.Roles.Select(x => x.Name).ToListAsync();
+
                 return View(new EditViewModel
                 {
                     Id = user.Id,
                     FullName = user.FullName,
-                    Email = user.Email
+                    Email = user.Email,
+                    SelectedRoles = await _userManager.GetRolesAsync(user)
                 });
             }
             return RedirectToAction("Index");
@@ -98,6 +104,11 @@ namespace IdentityApp.Controllers
 
                     if (result.Succeeded)
                     {
+                        await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
+                        if (model.SelectedRoles != null)
+                        {
+                            await _userManager.AddToRolesAsync(user, model.SelectedRoles);
+                        }
                         return RedirectToAction("Index");
                     }
 
@@ -106,6 +117,7 @@ namespace IdentityApp.Controllers
                         ModelState.AddModelError("", err.Description);
                     }
 
+                     return RedirectToAction("Index");
                 }
             }
 
