@@ -1,11 +1,13 @@
 using IdentityApp.Models;
 using IdentityApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityApp.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -22,8 +24,6 @@ namespace IdentityApp.Controllers
             return View(_userManager.Users);
         }
 
-
-   
 
 
         public async Task<IActionResult> Edit(string id)
@@ -91,7 +91,7 @@ namespace IdentityApp.Controllers
                         ModelState.AddModelError("", err.Description);
                     }
 
-                     return RedirectToAction("Index");
+                    return RedirectToAction("Index");
                 }
             }
 

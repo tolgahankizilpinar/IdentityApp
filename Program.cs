@@ -9,7 +9,7 @@ builder.Services.AddScoped<IEmailSender, SmtpEmailSender>(i =>
         builder.Configuration["EmailSender:Host"],
         builder.Configuration.GetValue<int>("EmailSender:Port"),
         builder.Configuration.GetValue<bool>("EmailSender:EnableSSL"),
-        builder.Configuration["EmailSender:Username"],
+        builder.Configuration["EmailSender:Username"]!,
         builder.Configuration["EmailSender:Password"]
     )
  );

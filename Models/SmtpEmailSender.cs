@@ -9,10 +9,10 @@ namespace IdentityApp.Models
         private string? _host;
         private int _port;
         private bool _enableSSL;
-        private string? _username;
+        private string _username;
         private string? _password;
 
-        public SmtpEmailSender(string? host, int port, bool enableSSL, string? username, string? password)
+        public SmtpEmailSender(string? host, int port, bool enableSSL, string username, string? password)
         {
             _host = host;
             _port = port;
